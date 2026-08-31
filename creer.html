@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Composer le bouquet</title>
+<meta name="theme-color" content="#1a0a12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌹</text></svg>">
+</head>
+<body class="page-form">
+
+<main class="form-wrap">
+  <header class="form-head">
+    <div class="w-orn">✿</div>
+    <p class="eyebrow">Étape 1 — écris ton mot</p>
+    <h1 class="w-title">Compose ton bouquet</h1>
+    <p class="w-sub">Remplis les champs, copie le lien, envoie-le-lui. Tout est dans le lien&nbsp;: rien n'est stocké nulle part.</p>
+  </header>
+
+  <form id="compose" class="form-card" autocomplete="off">
+    <label class="field">
+      <span class="field-label">Son prénom / petit surnom</span>
+      <input id="f-to" type="text" maxlength="80" placeholder="Mon amour" required>
+      <small class="hint">S'affiche dans le popup de bienvenue et en haut du mot.</small>
+    </label>
+
+    <label class="field">
+      <span class="field-label">Ton petit mot</span>
+      <textarea id="f-body" rows="6" maxlength="1200" placeholder="Écris ce que tu as sur le cœur…" required></textarea>
+      <small class="hint"><span id="count">0</span> / 1200 — les retours à la ligne sont conservés.</small>
+    </label>
+
+    <label class="field">
+      <span class="field-label">Signature <em>(optionnel)</em></span>
+      <input id="f-from" type="text" maxlength="80" placeholder="Avec tout mon amour, Mathéo">
+    </label>
+
+    <div class="form-actions">
+      <button type="submit" class="btn">Générer le lien</button>
+      <a id="preview" class="btn ghost" href="index.html" target="_blank" rel="noopener">Aperçu</a>
+    </div>
+  </form>
+
+  <section id="result" class="result" hidden>
+    <p class="eyebrow">Étape 2 — envoie-lui</p>
+    <div class="link-row">
+      <input id="link" type="text" readonly>
+      <button id="copy" class="btn" type="button">Copier</button>
+    </div>
+    <p class="hint" id="copy-state" role="status"></p>
+    <p class="hint warn">Le lien ne marche que si le site est en ligne (ou ouvert depuis le même dossier). En local, envoie-lui le dossier entier.</p>
+  </section>
+</main>
+
+<script src="js/message.js"></script>
+<script src="js/creer.js"></script>
+</body>
+</html>

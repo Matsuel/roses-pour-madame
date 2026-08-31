@@ -1,0 +1,217 @@
+/* ---------- Base ---------- */
+:root{
+  --bg-1:#1a0a12;
+  --bg-2:#2b0f1c;
+  --bg-3:#120609;
+  --ink:#f7e9ee;
+  --ink-soft:#d8b9c6;
+  --gold:#e7c07b;
+  --rose:#e0567a;
+  --card:rgba(38,14,24,.72);
+  --card-line:rgba(231,192,123,.28);
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Jost",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease-soft:cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  min-height:100svh;
+  font-family:var(--sans);
+  color:var(--ink);
+  background:
+    radial-gradient(120% 80% at 50% 0%, #3a1526 0%, transparent 60%),
+    radial-gradient(90% 60% at 15% 100%, #46182b 0%, transparent 55%),
+    linear-gradient(160deg,var(--bg-1) 0%,var(--bg-2) 45%,var(--bg-3) 100%);
+  background-attachment:fixed;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body::after{ /* vignette */
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:5;
+  background:radial-gradient(130% 110% at 50% 45%,transparent 62%,rgba(0,0,0,.45) 100%);
+}
+button{font:inherit;color:inherit}
+
+/* ---------- Boutons ---------- */
+.btn{
+  --pad:.85em 2.4em;
+  appearance:none;border:1px solid var(--card-line);
+  background:linear-gradient(180deg,rgba(231,192,123,.22),rgba(231,192,123,.08));
+  color:var(--ink);
+  padding:var(--pad);
+  border-radius:999px;
+  font-size:clamp(.95rem,.9rem + .4vw,1.05rem);
+  font-weight:400;letter-spacing:.18em;text-transform:uppercase;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .35s var(--ease-soft),box-shadow .35s var(--ease-soft),background .35s;
+  box-shadow:0 10px 30px -12px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.btn::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);
+  transform:translateX(-120%);
+}
+.btn:hover{transform:translateY(-2px);background:linear-gradient(180deg,rgba(231,192,123,.34),rgba(231,192,123,.14))}
+.btn:hover::after{transform:translateX(120%);transition:transform .8s var(--ease-soft)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.btn.ghost{background:transparent;letter-spacing:.14em;font-size:.8rem;padding:.7em 1.7em}
+
+/* ---------- Popup bienvenue ---------- */
+.overlay{
+  position:fixed;inset:0;z-index:20;
+  display:grid;place-items:center;padding:6vw 5vw;
+  background:radial-gradient(80% 60% at 50% 40%,rgba(58,21,38,.75),rgba(10,4,7,.94));
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  transition:opacity .9s var(--ease-soft),visibility .9s;
+}
+.overlay.is-gone{opacity:0;visibility:hidden;pointer-events:none}
+.w-card{
+  width:min(560px,100%);text-align:center;
+  padding:clamp(2rem,6vw,3.4rem) clamp(1.4rem,5vw,3rem);
+  border:1px solid var(--card-line);border-radius:26px;
+  background:var(--card);
+  box-shadow:0 40px 80px -40px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.08);
+  animation:rise 1s var(--ease-soft) both;
+}
+.w-orn{font-size:clamp(1.6rem,5vw,2.2rem);color:var(--gold);opacity:.85;margin-bottom:.6rem;animation:pulse 4s ease-in-out infinite}
+.eyebrow{
+  margin:0 0 .5rem;font-size:clamp(.62rem,.55rem + .35vw,.75rem);
+  letter-spacing:.34em;text-transform:uppercase;color:var(--ink-soft);opacity:.75;
+}
+.w-title{
+  font-family:var(--serif);font-weight:600;font-style:italic;
+  font-size:clamp(2.3rem,1.6rem + 6vw,4.2rem);
+  line-height:1.05;margin:0 0 .7rem;
+  background:linear-gradient(100deg,#fff 10%,var(--gold) 45%,var(--rose) 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.w-sub{margin:0 0 2rem;color:var(--ink-soft);font-weight:300;font-size:clamp(.95rem,.9rem + .4vw,1.1rem)}
+
+/* ---------- Scène ---------- */
+.scene{
+  min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(1rem,4vw,2.5rem);
+  padding:clamp(2rem,7vw,4rem) 5vw clamp(4rem,10vw,6rem);
+  opacity:0;transition:opacity 1s var(--ease-soft);
+}
+.scene.is-live{opacity:1}
+.scene[inert]{pointer-events:none}
+
+.bouquet-wrap{position:relative;width:min(420px,78vw);flex:0 0 auto}
+.bouquet{display:block;width:100%;height:auto;overflow:visible;
+  filter:drop-shadow(0 30px 40px rgba(0,0,0,.55))}
+.glow{
+  position:absolute;left:50%;top:38%;translate:-50% -50%;
+  width:120%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,86,122,.28),transparent 62%);
+  filter:blur(20px);opacity:0;animation:glowIn 2.4s 1.2s var(--ease-soft) forwards;
+}
+
+/* ---------- Le mot ---------- */
+.note{
+  width:min(620px,100%);text-align:center;
+  padding:clamp(1.6rem,5vw,2.8rem) clamp(1.3rem,5vw,3rem);
+  border:1px solid var(--card-line);border-radius:22px;
+  background:var(--card);
+  box-shadow:0 40px 70px -45px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.07);
+  opacity:0;transform:translateY(26px);
+  transition:opacity 1.2s var(--ease-soft),transform 1.2s var(--ease-soft);
+}
+.note.is-in{opacity:1;transform:none}
+.note-to{
+  margin:0 0 1rem;font-family:var(--serif);font-style:italic;
+  font-size:clamp(1.5rem,1.1rem + 2.4vw,2.3rem);color:var(--gold);
+}
+.note-body{
+  margin:0;font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.1rem,1rem + 1vw,1.5rem);line-height:1.65;
+  color:var(--ink);white-space:pre-line;
+}
+.note-from{
+  margin:1.4rem 0 0;font-size:clamp(.72rem,.65rem + .4vw,.85rem);
+  letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);opacity:.8;
+}
+.note-actions{margin-top:1.8rem}
+
+.make-link{
+  position:fixed;right:1rem;bottom:1rem;z-index:10;
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-soft);opacity:.35;text-decoration:none;
+  padding:.5rem .8rem;transition:opacity .3s;
+}
+.make-link:hover{opacity:.9}
+
+/* ---------- Pétales qui tombent ---------- */
+.petals{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.petal{
+  position:absolute;top:-8vh;width:14px;height:14px;
+  border-radius:50% 0 50% 50%;
+  background:linear-gradient(140deg,#ff8fae,#c22f55);
+  opacity:0;will-change:transform,opacity;
+  animation:fall linear infinite;
+}
+
+/* ---------- Animations SVG ---------- */
+.stem{
+  fill:none;stroke:#3f7a48;stroke-linecap:round;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+  animation:draw 1.5s var(--d,0s) var(--ease-soft) forwards;
+}
+.leaf{
+  transform-box:fill-box;transform-origin:0% 50%;
+  transform:scale(0);opacity:0;
+  animation:unfurl .8s var(--d,0s) var(--ease-soft) forwards;
+}
+.rose-head{
+  transform-box:fill-box;transform-origin:50% 50%;
+  transform:scale(0) rotate(-45deg);
+  animation:bloom 1.05s var(--d,0s) cubic-bezier(.18,1.3,.4,1) forwards;
+}
+.wrap-paper{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);
+  animation:grow .9s .1s var(--ease-soft) forwards}
+.ribbon{opacity:0;transform-box:fill-box;transform-origin:50% 50%;transform:scale(.4);
+  animation:pop .7s 1.05s cubic-bezier(.2,1.5,.4,1) forwards}
+
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes unfurl{from{transform:scale(0) rotate(-12deg);opacity:0}
+  to{transform:scale(1) rotate(0);opacity:1}}
+@keyframes bloom{
+  0%{transform:scale(0) rotate(-45deg)}
+  70%{transform:scale(1.08) rotate(6deg)}
+  100%{transform:scale(1) rotate(0)}
+}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+@keyframes glowIn{to{opacity:1}}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.12)}}
+@keyframes fall{
+  0%{opacity:0;transform:translate3d(0,0,0) rotate(0)}
+  8%{opacity:.85}
+  90%{opacity:.6}
+  100%{opacity:0;transform:translate3d(var(--dx,40px),112vh,0) rotate(var(--spin,540deg))}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:560px){
+  .bouquet-wrap{width:min(340px,86vw)}
+  .btn{--pad:.9em 2rem}
+  .make-link{right:.4rem;bottom:.4rem;font-size:.6rem}
+}
+@media (min-width:960px) and (min-height:700px){
+  .scene{flex-direction:row;gap:clamp(2rem,5vw,5rem);justify-content:center}
+  .note{text-align:left;max-width:460px}
+  .bouquet-wrap{width:min(420px,38vw)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .stem,.leaf,.rose-head,.wrap-paper,.ribbon,.glow,.w-card,.w-orn{animation-duration:.01ms!important;animation-delay:0s!important}
+  .stem{stroke-dashoffset:0}
+  .petal{display:none}
+  .note,.scene,.overlay{transition-duration:.2s}
+}

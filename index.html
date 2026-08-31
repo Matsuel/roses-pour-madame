@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un bouquet pour toi</title>
+<meta name="description" content="Un bouquet de roses et un petit mot.">
+<meta name="theme-color" content="#1a0a12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌹</text></svg>">
+</head>
+<body>
+
+<div id="petals" class="petals" aria-hidden="true"></div>
+
+<!-- Popup de bienvenue -->
+<section id="welcome" class="overlay">
+  <div class="w-card">
+    <div class="w-orn">✿</div>
+    <p class="eyebrow" id="w-eyebrow">Un petit quelque chose pour toi</p>
+    <h1 class="w-title" id="w-title">Bienvenue</h1>
+    <p class="w-sub">J'ai préparé quelque chose&nbsp;… prête&nbsp;?</p>
+    <button id="enter-btn" class="btn" type="button">Entrer</button>
+  </div>
+</section>
+
+<!-- Scène -->
+<main id="scene" class="scene" inert>
+  <div class="bouquet-wrap">
+    <div class="glow" aria-hidden="true"></div>
+    <svg id="bouquet" class="bouquet" viewBox="0 0 400 640" role="img" aria-label="Un bouquet de roses"></svg>
+  </div>
+
+  <article id="note" class="note">
+    <p class="note-to" id="note-to"></p>
+    <p class="note-body" id="note-body"></p>
+    <p class="note-from" id="note-from"></p>
+    <div class="note-actions">
+      <button id="replay" class="btn ghost" type="button">Revoir l'animation</button>
+    </div>
+  </article>
+</main>
+
+<a class="make-link" href="creer.html">Créer le tien</a>
+
+<script src="js/message.js"></script>
+<script src="js/bouquet.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
