@@ -4,7 +4,7 @@
 
   var DEFAULT = {
     to: 'Ma chérie',
-    body: "Un petit coucou de la part de ton amoureux. J'espère que tu vas bien et que tu passes une bonne journée. Je t'aime très fort et je pense à toi.",
+    body: "Un petit coucou de la part de ton amoureux.\nJ'espère que tu vas bien et que tu passes une bonne journée. \Je t'aime très fort et je pense à toi.",
     from: 'Amoureusement amoureux, Chou'
   };
 
